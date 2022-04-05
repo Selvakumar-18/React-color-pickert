@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import {  useState } from 'react';
 import './App.css';
+import {ChromePicker} from 'react-color';
 
 function App() {
+  const[color,setColor] = useState("#000")
+  const[showcolor,setShowcolor] = useState('false')
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <center>
+    <div>
+    
+      <button onClick={()=> setShowcolor ( showcolor=>!showcolor)}>
+        {showcolor ? 'close color picker':'pick a color'}
+      </button>
+      
+      {
+        showcolor &&  <ChromePicker 
+                        color={color} 
+                        onChange = {updatecolor => setColor(updatecolor.hex)}/>
+      }
+
+    
+     <p>your color code is(hex code):{color}</p>
     </div>
+    </center>
   );
 }
 
